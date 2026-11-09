@@ -1,90 +1,45 @@
-# 🕹️ Subway Surfers Arcade
+# SUTD 50.002 FPGA arcade machine
 
-A two-player browser arcade game inspired by the **Nano Banana** physical Subway Surfers cabinet. The main game lives in `index.html` and runs directly in a browser.
+A two-player, three-lane browser arcade prototype for exploring a Subway Surfers-style physical cabinet. Players dodge falling cubes while the game speeds up; the longer survival time wins. The visual direction draws on the **Nano Banana** physical Subway Surfers cabinet.
 
-Despite the repository name `subway-surfers-fpga`, the current source is a browser game and sprite-animation studies. FPGA HDL, board constraints and hardware build instructions are not included.
+The repository name reflects the intended **SUTD 50.002 FPGA arcade-machine context**. The source currently contains a browser game and two sprite-animation studies. It does not include HDL, board constraints, hardware integration or an FPGA build procedure.
 
-![Game Theme](https://img.shields.io/badge/theme-TRON%20arcade-00f0ff?style=flat-square) ![Players](https://img.shields.io/badge/players-2-39ff14?style=flat-square) ![File](https://img.shields.io/badge/single%20file-HTML-orange?style=flat-square)
+## Play the browser prototype
 
----
+Open [`index.html`](index.html) directly in a modern browser. No package installation, server or build step is required. The existing hosted game uses [GitHub Pages](https://neonat.github.io/sutd-50002-fpga-arcade-machine/).
 
-## 🎮 How to Play
+| Player | Move left | Move right |
+| --- | --- | --- |
+| P1 | `A` | `D` |
+| P2 | `←` | `→` |
 
-Each player controls a character on a **3-lane grid**. Glowing cubes fall down the lanes — dodge them or you die. The game speeds up over time, just like Subway Surfers. Last player standing wins.
+Press `Space` to start or restart. On-screen buttons also accept mouse and touch input.
 
-### Rules
-- Cubes fall from the top and disappear at the bottom
-- If a cube reaches the bottom of **your lane**, you die
-- Multiple cubes fall at once, but there is **always at least one safe lane**
-- No lives — one hit and you're out
-- The session ends when **both players** have died
-- Winner is whoever survived longest
+Each player has a three-lane grid. A cube reaching the bottom of the player's current lane ends that player's run. The session continues until both players are out, then compares their survival times. The game includes logic to leave a safe lane near the bottom.
 
----
+## What is implemented
 
-## ⌨️ Controls
+- Two players with separate lane positions, obstacle grids and survival timers.
+- Falling obstacles, increasing speed, collision handling, restart and winner display.
+- Canvas-based dot-matrix player sprites and CSS neon effects.
+- Separate monochrome running and strafing animation studies.
 
-| Player | Move Left | Move Right |
-|--------|-----------|------------|
-| P1     | `A`       | `D`        |
-| P2     | `←`       | `→`        |
+The implementation uses vanilla HTML, CSS and JavaScript. [Orbitron](https://fonts.google.com/specimen/Orbitron) and [Share Tech Mono](https://fonts.google.com/specimen/Share+Tech+Mono) supply the arcade typography; loading those Google Fonts requires a network connection.
 
-Press `Space` to start or restart.
+## Source guide
 
-On-screen buttons also work for touch/mouse.
+| File | Purpose |
+| --- | --- |
+| [`index.html`](index.html) | Main two-player game, including interface, styles and game loop. |
+| [`8x8_runner_bw.html`](8x8_runner_bw.html) | Monochrome runner animation study. |
+| [`8x8_runner_strafe.html`](8x8_runner_strafe.html) | Running and strafing animation study. |
 
----
+## Context and status
 
-## 🚀 Play It
+The cabinet reference uses a 3×5 grid of backlit amber cubes per player, a dot-matrix lane indicator and physical arcade buttons. This repository explores that interaction in a browser; it is not a record of completed FPGA hardware.
 
-### Option 1 — Open locally
-Download `index.html` and open it in any browser. That's it.
+The existing roadmap includes sound effects, scoring beyond survival time, an animated in-game walk cycle, persistent high scores and further mobile layout work. There is no automated test suite or hardware verification flow checked in.
 
-### Option 2 — Play online
+## License
 
-Open the existing [GitHub Pages game](https://neonat.github.io/subway-surfers-fpga/).
-
----
-
-## 🗂️ Project Structure
-
-```
-/
-├── index.html               # main two-player game
-├── 8x8_runner_bw.html       # monochrome runner animation study
-├── 8x8_runner_strafe.html   # running/strafe animation study
-└── README.md
-```
-
----
-
-## 🔧 Built With
-
-- Vanilla HTML / CSS / JavaScript; no package installation or build step
-- Optional Google Fonts require a network connection
-- [Orbitron](https://fonts.google.com/specimen/Orbitron) — display font (Tron aesthetic)
-- [Share Tech Mono](https://fonts.google.com/specimen/Share+Tech+Mono) — monospace UI font
-- Canvas API — dot-matrix player sprite
-- CSS animations — neon glow, scanlines, flicker effects
-
----
-
-## 🖼️ Inspired By
-
-The physical **Nano Banana** Subway Surfers arcade cabinet — a 3×5 grid of backlit amber cubes per player, with a dot-matrix display showing the player's lane position, and chunky green arcade buttons.
-
----
-
-## 📋 Roadmap
-
-- [ ] Sound effects
-- [ ] Scoring system (beyond time survived)
-- [ ] Animated sprite walk cycle on the dot-matrix
-- [ ] High score persistence
-- [ ] Mobile layout optimisation
-
----
-
-## 📄 License
-
-MIT — do whatever you want with it.
+The existing project documentation declares the MIT License. A standalone `LICENSE` file is not included in the current repository.
