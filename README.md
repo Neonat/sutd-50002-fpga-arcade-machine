@@ -1,6 +1,8 @@
 # 🕹️ Subway Surfers Arcade
 
-A two-player browser arcade game inspired by the **Nano Banana** physical Subway Surfers cabinet. Built as a single self-contained HTML file — no server, no dependencies, no install.
+A two-player browser arcade game inspired by the **Nano Banana** physical Subway Surfers cabinet. The main game lives in `index.html` and runs directly in a browser.
+
+Despite the repository name `subway-surfers-fpga`, the current source is a browser game and sprite-animation studies. FPGA HDL, board constraints and hardware build instructions are not included.
 
 ![Game Theme](https://img.shields.io/badge/theme-TRON%20arcade-00f0ff?style=flat-square) ![Players](https://img.shields.io/badge/players-2-39ff14?style=flat-square) ![File](https://img.shields.io/badge/single%20file-HTML-orange?style=flat-square)
 
@@ -38,10 +40,9 @@ On-screen buttons also work for touch/mouse.
 ### Option 1 — Open locally
 Download `index.html` and open it in any browser. That's it.
 
-### Option 2 — GitHub Pages
-1. Fork or clone this repo
-2. Go to **Settings → Pages → Source → main branch**
-3. Share the link: `https://neonat.github.io/subway-surfers-fpga/`
+### Option 2 — Play online
+
+Open the existing [GitHub Pages game](https://neonat.github.io/subway-surfers-fpga/).
 
 ---
 
@@ -49,7 +50,9 @@ Download `index.html` and open it in any browser. That's it.
 
 ```
 /
-└── index.html    # entire game — HTML, CSS, and JS in one file
+├── index.html               # main two-player game
+├── 8x8_runner_bw.html       # monochrome runner animation study
+├── 8x8_runner_strafe.html   # running/strafe animation study
 └── README.md
 ```
 
@@ -57,7 +60,8 @@ Download `index.html` and open it in any browser. That's it.
 
 ## 🔧 Built With
 
-- Vanilla HTML / CSS / JavaScript — zero dependencies
+- Vanilla HTML / CSS / JavaScript; no package installation or build step
+- Optional Google Fonts require a network connection
 - [Orbitron](https://fonts.google.com/specimen/Orbitron) — display font (Tron aesthetic)
 - [Share Tech Mono](https://fonts.google.com/specimen/Share+Tech+Mono) — monospace UI font
 - Canvas API — dot-matrix player sprite
