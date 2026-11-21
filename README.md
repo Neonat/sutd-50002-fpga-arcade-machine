@@ -1,45 +1,24 @@
-# SUTD 50.002 FPGA arcade machine
+# Two-player arcade cabinet prototype | SUTD 50.002
 
-A two-player, three-lane browser arcade prototype for exploring a Subway Surfers-style physical cabinet. Players dodge falling cubes while the game speeds up; the longer survival time wins. The visual direction draws on the **Nano Banana** physical Subway Surfers cabinet.
+Two players dodge falling cubes on adjacent three-lane grids. Each player can move only left or right. When a cube reaches a player's lane at the bottom, their timer stops and the other player can keep going. The longer survival time wins. [Play the browser prototype](https://neonat.github.io/sutd-50002-fpga-arcade-machine/).
 
-The repository name reflects the intended **SUTD 50.002 FPGA arcade-machine context**. The source currently contains a browser game and two sprite-animation studies. It does not include HDL, board constraints, hardware integration or an FPGA build procedure.
+The design draws on the Nano Banana physical Subway Surfers cabinet. Its backlit cube grid, button controls, and dot-matrix lane indicator gave the SUTD 50.002 FPGA arcade-machine project a concrete interface to try in software. This repository contains the browser game and sprite studies. No HDL, board constraints, or completed hardware build are included.
 
-## Play the browser prototype
+## Play locally
 
-Open [`index.html`](index.html) directly in a modern browser. No package installation, server or build step is required. The existing hosted game uses [GitHub Pages](https://neonat.github.io/sutd-50002-fpga-arcade-machine/).
+Open [index.html](index.html) in a browser. Press **Space** to start or restart. Player 1 uses **A** and **D**. Player 2 uses the **left** and **right** arrow keys. The on-screen lane buttons also accept mouse and touch input. The page runs directly from the file. It requests the optional Orbitron and Share Tech Mono fonts from Google Fonts.
 
-| Player | Move left | Move right |
-| --- | --- | --- |
-| P1 | `A` | `D` |
-| P2 | `←` | `→` |
+## How the cabinet maps to the browser
 
-Press `Space` to start or restart. On-screen buttons also accept mouse and touch input.
-
-Each player has a three-lane grid. A cube reaching the bottom of the player's current lane ends that player's run. The session continues until both players are out, then compares their survival times. The game includes logic to leave a safe lane near the bottom.
-
-## What is implemented
-
-- Two players with separate lane positions, obstacle grids and survival timers.
-- Falling obstacles, increasing speed, collision handling, restart and winner display.
-- Canvas-based dot-matrix player sprites and CSS neon effects.
-- Separate monochrome running and strafing animation studies.
-
-The implementation uses vanilla HTML, CSS and JavaScript. [Orbitron](https://fonts.google.com/specimen/Orbitron) and [Share Tech Mono](https://fonts.google.com/specimen/Share+Tech+Mono) supply the arcade typography; loading those Google Fonts requires a network connection.
-
-## Source guide
-
-| File | Purpose |
+| Cabinet element | Browser implementation |
 | --- | --- |
-| [`index.html`](index.html) | Main two-player game, including interface, styles and game loop. |
-| [`8x8_runner_bw.html`](8x8_runner_bw.html) | Monochrome runner animation study. |
-| [`8x8_runner_strafe.html`](8x8_runner_strafe.html) | Running and strafing animation study. |
+| Backlit cubes | CSS Grid lays out three columns and five rows per player. JavaScript advances the obstacles and checks whether a cube hits the player's lane. |
+| Lane indicator | A small HTML canvas draws the player's dot-matrix figure. Moving changes the lane shown beneath the grid. |
+| Arcade buttons | Keyboard and pointer input call the same lane movement functions, which stop at the outer edges. |
+| Survival timer | A shared JavaScript game loop advances both grids. It shortens the delay between ticks as the round progresses and compares the final times after both players are out. |
 
-## Context and status
+The [monochrome runner](8x8_runner_bw.html) and [strafing runner](8x8_runner_strafe.html) are standalone animation studies. Open either file to inspect the motion separately from the game. The repository contains no automated test suite.
 
-The cabinet reference uses a 3×5 grid of backlit amber cubes per player, a dot-matrix lane indicator and physical arcade buttons. This repository explores that interaction in a browser; it is not a record of completed FPGA hardware.
+## Licence
 
-The existing roadmap includes sound effects, scoring beyond survival time, an animated in-game walk cycle, persistent high scores and further mobile layout work. There is no automated test suite or hardware verification flow checked in.
-
-## License
-
-The existing project documentation declares the MIT License. A standalone `LICENSE` file is not included in the current repository.
+Earlier project documentation identifies the MIT License. The repository does not include a standalone licence file.
